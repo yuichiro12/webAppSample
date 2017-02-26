@@ -8,7 +8,20 @@
 	<%= @user.comment %>
   </div>
   <div>
-	<%= link_to "edit", edit_user_path(@user) %>
+	<h4>スキル・特徴</h4><button data-toggle="form-add-skill">edit skills</button>
+	<%= form_tag(@user, remote: true, class: "form-add-skill", style: "display:none;") do %>
+	  <%= p 1111 %>
+	  <%= hidden_field_tag :user_id, @user.id %>
+	<% end %>
+	<hr/>
+	<% if !@skills.nil? %>
+	  <% @skills.each do |s| %>
+		<%= "[" + s.point + "]" +  s.name %>
+	  <% end %>
+	<% end %>
+  </div>
+  <div>
+	<%= link_to "edit", edit_user_path(@user), class: "btn btn-info" %>
   </div>
   <div>
 	<%= link_to "delete", @user, method: :delete, data: {confirm: "本当に削除しますか？"},
