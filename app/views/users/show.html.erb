@@ -1,0 +1,17 @@
+<% provide(:title, "#{@user.name} プロフィール") %>
+<h1><%= "Profile of #{@user.name}" %></h1>
+<div>
+  <div>
+	<%= @user.name %>
+  </div>
+  <div>
+	<%= @user.comment %>
+  </div>
+  <div>
+	<%= link_to "edit", edit_user_path(@user) %>
+  </div>
+  <div>
+	<%= link_to "delete", @user, method: :delete, data: {confirm: "本当に削除しますか？"},
+	class: "btn btn-danger" %>
+  </div>
+</div>
