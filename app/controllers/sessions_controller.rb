@@ -1,17 +1,20 @@
 class SessionsController < ApplicationController
-  def login
-    user = User.find_by(name: params[:sessions][:name])
-    if user && user.authenticate(params[:sessions][:password])
+  def new
+  end
+
+  def create
+    user = User.find_by(name: params[:session][:name])
+    if user && user.authenticate(params[:session][:password])
       log_in user
-      redirect_to @user
+      redirect_to user
     else
       flash.now[:danger] = "invalid username or password"
       render "new"
     end
   end
 
-  def logout
+  def destroy
     log_out
-    redirect_to root_url
+    redirect_to login_path
   end
 end

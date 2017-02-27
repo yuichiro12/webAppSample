@@ -22,4 +22,6 @@ class User < ApplicationRecord
   # TODO 使うかも
   def has_skill?(skill_id)
   end
+
+  has_secure_password
 end
