@@ -7,5 +7,8 @@ Rails.application.routes.draw do
 
   get "/logout", to: "sessions#logout"
 
+  post "/create_skill", to: "users#create_skill"
+
   resources :users
+  resources :user_skills, only: [:create, :destroy]
 end

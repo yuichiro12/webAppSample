@@ -8,14 +8,25 @@
 	<%= @user.comment %>
   </div>
   <div>
-	<h4>スキル・特徴</h4><button data-toggle="form-add-skill">edit skills</button>
-	<%= form_tag(@user, remote: true, class: "form-add-skill", style: "display:none;") do %>
-	  <%= p 1111 %>
-	  <%= hidden_field_tag :user_id, @user.id %>
-	<% end %>
+	<h4>スキル・特徴   <button data-toggle="form-add-skill" class="btn btn-xs">edit skills</button></h4>
 	<hr/>
-	<% if !@skills.nil? %>
-	  <% @skills.each do |s| %>
+	<% @user.skills.each do |n| %>
+	  <%#= TODO: ボタンのスタイリング %>
+	  <div><span><button class="plus-1-button"><%= n.point %></button><%= n.name %></span></div>
+	<% end %>
+	<%= form_for(@skill,
+				 url: create_skill_path,
+				 remote: true,
+				 html: {class: "form-add-skill", style: "display:none;"}) do |f| %>
+	  <%= f.text_area :name, class: "form-control col-md-6" %>
+	  <%= f.fields_for @user_skill do |s| %>
+		<%= s.hidden_field :user_id, value: @user.id %>
+		<%= s.hidden_field :point, value: 0  %>
+	  <% end %>
+	  <%= f.submit class: "btn btn-success" %>
+	<% end %>
+	<% if !@skill.present? %>
+	  <% @skill.each do |s| %>
 		<%= "[" + s.point + "]" +  s.name %>
 	  <% end %>
 	<% end %>
