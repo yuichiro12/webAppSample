@@ -8,14 +8,24 @@
 	<%= @user.comment %>
   </div>
   <div>
-	<h4>スキル・特徴   <button data-toggle="form-add-skill" class="btn btn-xs">edit skills</button></h4>
+	<h4>スキル・特徴
+	  <%= button_tag "edit skills", data: {toggle: "form-add-skill"}, class: "btn btn-xs" %>
+	</h4>
 	<hr/>
-	<% @user.skills.each do |n| %>
+	<% @user.skills.zip(@user.user_skills).each do |s, us| %>
 	  <%#= TODO: ボタンのスタイリング %>
-	  <div><span><button class="plus-1-button"><%= n.point %></button><%= n.name %></span></div>
+	  <div>
+		<span>
+		  <%= button_tag us.point,
+		  data: {plus1: current_user.id,
+				 user_skill_id: us.id,
+				 url: add_plus_one_path}, class: "plus-1-button" %>
+		  <%= s.name %>
+		</span>
+	  </div>
 	<% end %>
 	<%= form_for(@skill,
-				 url: create_skill_path,
+				 url: add_skill_path,
 				 remote: true,
 				 html: {class: "form-add-skill", style: "display:none;"}) do |f| %>
 	  <%= f.text_area :name, class: "form-control col-md-6" %>
@@ -24,11 +34,6 @@
 		<%= s.hidden_field :point, value: 0  %>
 	  <% end %>
 	  <%= f.submit class: "btn btn-success" %>
-	<% end %>
-	<% if !@skill.present? %>
-	  <% @skill.each do |s| %>
-		<%= "[" + s.point + "]" +  s.name %>
-	  <% end %>
 	<% end %>
   </div>
   <% if current_user.id == @user.id %>

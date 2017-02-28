@@ -5,14 +5,12 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @user.skills = Skill.joins(:user_skills)
-                     .select(:name, :point)
+    @user.skills = Skill.includes(:user_skills => :plus_ones)
                      .where(user_skills: {user_id: params[:id]})
                      .order("`user_skills`.`point` DESC")
-    logger.debug @user.skills.nil?.inspect
-    
     @skill = Skill.new
     @user_skill = UserSkill.new
+    logger.debug @user.user_skills.inspect
   end
 
   def new
@@ -31,11 +29,12 @@ class UsersController < ApplicationController
 
   def create_skill
     # TODO スキルのUnique制約，バリデーション
+    # TODO 失敗時のフラッシュメッセージ
     # TODO リファクタ，パーシャル読み込みとか追加
     relation_params = user_skill_params
     @user = User.find(relation_params[:user_skill][:user_id])
     @skill = Skill.create(skill_params)
-    if !@skill.id.nil?
+    if @skill && !@skill.id.nil?
       if @user.add_user_skill(@skill.id, relation_params[:user_skill][:point])
         render
       else
@@ -46,13 +45,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_plus_one
+    # TODO Unique制約，バリデーション，トランザクション
+    # TODO 失敗時のフラッシュメッセージ
+    # TODO リファクタ，パーシャル読み込みとか追加
+    user_skill = UserSkill.find(plus_one_params[:user_skill_id])
+    if PlusOne.find_by(plus_one_params).nil?
+      PlusOne.create(plus_one_params)
+      user_skill.update!(point: user_skill.point + 1)
+    end
+    render json: { point: user_skill.point }
+  end
+
   def edit
     @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params(false))
+    if @user.update(user_params(false))
       redirect_to @user
     else
       render "edit"
@@ -64,21 +75,28 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
-  # paramsへの直接のアクセスを防ぐ
-  def user_params(is_new_user)
-    # TODO アバターの追加
-    if is_new_user == true
-      params.require(:user).permit(:name, :password)
-    else
-      params.require(:user).permit(:name, :comment, :password)
+
+  private
+
+    # strong parameter
+    def user_params(is_new_user)
+      # TODO アバターの追加
+      if is_new_user == true
+        params.require(:user).permit(:name, :password)
+      else
+        params.require(:user).permit(:name, :comment, :password)
+      end
     end
-  end
 
-  def skill_params
-    params.require(:skill).permit(:name)
-  end
+    def skill_params
+      params.require(:skill).permit(:name)
+    end
 
-  def user_skill_params
-    params.require(:skill).permit(user_skill: [:user_id, :point])
-  end
+    def user_skill_params
+      params.require(:skill).permit(user_skill: [:user_id, :point])
+    end
+
+    def plus_one_params
+      params.permit(:user_skill_id, :plused_user_id)
+    end
 end

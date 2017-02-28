@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   delete "/logout", to: "sessions#destroy"
 
-  post "/create_skill", to: "users#create_skill"
+  post "/add_skill", to: "users#create_skill"
+
+  post "/add_plus_one", to: "users#create_plus_one"
 
   resources :users
   # TODO 使わないかも

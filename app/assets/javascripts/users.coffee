@@ -5,10 +5,26 @@
 $ ->
     flag = false
     $("button[data-toggle]").click ->
-        target = $("." + $("button[data-toggle]").data("toggle"))
+        target = $("." + $(this).data("toggle"))
         if flag == false
             target.show()
             flag = true
         else
             target.hide()
             flag = false
+
+    $("button[data-plus1]").click ->
+        target = $(this)
+        $.ajax({
+            type: "post",
+            url: target.data("url"),
+            datatype: "json",
+            data: {
+                "user_skill_id" : target.data("user-skill-id"),
+                "plused_user_id" : target.data("plus1")
+            },
+            success: (data)->
+                console.log(target)
+                target.text(data.point)
+        })
+    return
