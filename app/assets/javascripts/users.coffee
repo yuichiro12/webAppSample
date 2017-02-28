@@ -13,8 +13,12 @@ $ ->
             target.hide()
             flag = false
 
+    $("button[data-skill]").click ->
+        
+
     $("button[data-plus1]").click ->
         target = $(this)
+        target.prop("disabled", true)
         $.ajax({
             type: "post",
             url: target.data("url"),
@@ -24,7 +28,7 @@ $ ->
                 "plused_user_id" : target.data("plus1")
             },
             success: (data)->
-                console.log(target)
                 target.text(data.point)
         })
+        target.prop("disabled", false)
     return

@@ -1,14 +1,16 @@
-# coding: utf-8
 class User < ApplicationRecord
-  attr_accessor :skills
-
   validates :name, presence: true
   validates :password, presence: true
 
   has_many :user_skills,
+           ->{ order("`user_skills`.`point` DESC") },
            dependent: :destroy
+  has_many :skills,
+           ->{ order("`user_skills`.`point` DESC") },
+           through: :user_skills,
+           source: :skill
 
-  accepts_nested_attributes_for :user_skills
+  accepts_nested_attributes_for :user_skills, :skills
 
 
   def add_user_skill(skill_id, point)
@@ -17,10 +19,6 @@ class User < ApplicationRecord
 
   def remove_user_skill(skill_id)
     user_skills.find_by(skill_id: skill_id).destroy
-  end
-
-  # TODO 使うかも
-  def has_skill?(skill_id)
   end
 
   has_secure_password

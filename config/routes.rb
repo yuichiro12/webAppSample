@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   post "/add_skill", to: "users#create_skill"
 
-  post "/add_plus_one", to: "users#create_plus_one"
+  post "/plus1", to: "users#plus1"
 
   resources :users
   # TODO 使わないかも

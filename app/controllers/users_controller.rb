@@ -5,12 +5,9 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @user.skills = Skill.includes(:user_skills => :plus_ones)
-                     .where(user_skills: {user_id: params[:id]})
-                     .order("`user_skills`.`point` DESC")
     @skill = Skill.new
     @user_skill = UserSkill.new
-    logger.debug @user.user_skills.inspect
+    logger.debug @user.skills.pretty_inspect
   end
 
   def new
@@ -36,23 +33,25 @@ class UsersController < ApplicationController
     @skill = Skill.create(skill_params)
     if @skill && !@skill.id.nil?
       if @user.add_user_skill(@skill.id, relation_params[:user_skill][:point])
-        render
-      else
-        render "show"
+        render json: @skill
       end
     else
       render "show"
     end
   end
 
-  def create_plus_one
+  def plus1
     # TODO Unique制約，バリデーション，トランザクション
     # TODO 失敗時のフラッシュメッセージ
     # TODO リファクタ，パーシャル読み込みとか追加
-    user_skill = UserSkill.find(plus_one_params[:user_skill_id])
-    if PlusOne.find_by(plus_one_params).nil?
-      PlusOne.create(plus_one_params)
+    user_skill = UserSkill.find(plus1_params[:user_skill_id])
+    plus1 = PlusOne.find_by(plus1_params)
+    if plus1.nil?
+      PlusOne.create(plus1_params)
       user_skill.update!(point: user_skill.point + 1)
+    else
+      plus1.destroy
+      user_skill.update!(point: user_skill.point - 1)
     end
     render json: { point: user_skill.point }
   end
@@ -96,7 +95,7 @@ class UsersController < ApplicationController
       params.require(:skill).permit(user_skill: [:user_id, :point])
     end
 
-    def plus_one_params
+    def plus1_params
       params.permit(:user_skill_id, :plused_user_id)
     end
 end
