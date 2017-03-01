@@ -7,7 +7,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @skill = Skill.new
     @user_skill = UserSkill.new
-    logger.debug @user.skills.pretty_inspect
   end
 
   def new
@@ -29,15 +28,12 @@ class UsersController < ApplicationController
     # TODO 失敗時のフラッシュメッセージ
     # TODO リファクタ，パーシャル読み込みとか追加
     relation_params = user_skill_params
-    @user = User.find(relation_params[:user_skill][:user_id])
+    @user = User.find(relation_params[:user_id])
     @skill = Skill.create(skill_params)
     if @skill && !@skill.id.nil?
-      if @user.add_user_skill(@skill.id, relation_params[:user_skill][:point])
-        render json: @skill
-      end
-    else
-      render "show"
+      @user.add_user_skill(@skill.id, relation_params[:point])
     end
+    render partial: "skill_list"
   end
 
   def plus1
@@ -92,7 +88,7 @@ class UsersController < ApplicationController
     end
 
     def user_skill_params
-      params.require(:skill).permit(user_skill: [:user_id, :point])
+      params.require(:user_skill).permit(:user_id, :point)
     end
 
     def plus1_params

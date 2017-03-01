@@ -1,0 +1,12 @@
+<% @user.skills.zip(@user.user_skills).each do |s, us| %>
+  <%#= TODO: ボタンのスタイリング %>
+  <div>
+	<span>
+	  <%= button_tag(us.point,
+					 data: {plus1: current_user.id,
+							user_skill_id: us.id,
+							url: plus1_path}, class: "plus1-button") %>
+	  <%= s.name %>
+	</span>
+  </div>
+<% end %>

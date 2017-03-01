@@ -13,10 +13,33 @@ $ ->
             target.hide()
             flag = false
 
-    $("button[data-skill]").click ->
+    $("input.skill-submit").click (e)->
+        $(this).prop("disabled", true)
+        target = $(this).parent("form")
+        t_area = target.children(".skill-name")
+        target.prop("disabled", true)
+        $.ajax({
+            type: "post",
+            url: target.attr("action"),
+            datatype: "json",
+            data: {
+                "skill" : {
+                    "name" : $.trim(t_area.val())
+                },
+                "user_skill" : {
+                    "user_id" : target.data("userid"),
+                    "point" : 0
+                }
+            },
+            success: (data)->
+                $("div#skill-list").html(data)
+                t_area.val("")
+        })
+        $(this).prop("disabled", false)
+        return e.preventDefault()
         
 
-    $("button[data-plus1]").click ->
+    $("div#skill-list").on "click", "button[data-plus1]", ->
         target = $(this)
         target.prop("disabled", true)
         $.ajax({
