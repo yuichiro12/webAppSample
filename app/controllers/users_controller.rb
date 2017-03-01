@@ -9,6 +9,10 @@ class UsersController < ApplicationController
     @user_skill = UserSkill.new
   end
 
+  def show_skilled_users
+    @skilled_users = Skill.find_by(name: params[:name]).users
+  end
+
   def new
     @user = User.new
   end

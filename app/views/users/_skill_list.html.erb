@@ -7,7 +7,7 @@
 							user_skill_id: us.id,
 							url: plus1_path},
 					 class: "plus1-button") %>
-	  <%= link_to s.name, "#", data: {user_skill_id: us.id} %>
+	  <%= link_to s.name, "/skills/#{s.name}", data: {user_skill_id: us.id} %>
 	  <% if current_user.id == @user.id %>
 		<%= tag("span",
 				data: {user_skill_id: us.id,
