@@ -9,11 +9,14 @@
 					 class: "plus1-button") %>
 	  <%= link_to s.name, "/skills/#{s.name}", data: {user_skill_id: us.id} %>
 	  <% if current_user.id == @user.id %>
-		<%= tag("span",
-				data: {user_skill_id: us.id,
-					   user_id: @user.id,
-					   url: remove_skill_path},
-				class: "glyphicon glyphicon-remove-circle remove-skill") %>
+		<%= content_tag(:span, "",
+						data: {user_skill_id: us.id,
+							   user_id: @user.id,
+							   url: remove_skill_path},
+						class: "glyphicon glyphicon-remove-circle remove-skill") %>
+	  <% end %>
+	  <% us.plus_ones.each do |po| %>
+		<%= link_to po.user.name, po.user %>
 	  <% end %>
 	</span>
   </div>

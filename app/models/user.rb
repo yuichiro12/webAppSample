@@ -7,8 +7,7 @@ class User < ApplicationRecord
            dependent: :destroy
   has_many :skills,
            ->{ order("`user_skills`.`point` DESC") },
-           through: :user_skills,
-           source: :skill
+           through: :user_skills
 
   accepts_nested_attributes_for :user_skills, :skills
 
