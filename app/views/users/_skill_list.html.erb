@@ -1,4 +1,4 @@
-<% @user.skills.zip(@user.user_skills).each do |s, us| %>
+<% @user.skills.zip(@user.user_skills).each_with_index do |(s, us), i| %>
   <%#= TODO: ボタンのスタイリング %>
   <div>
 	<span>
@@ -15,8 +15,10 @@
 							   url: remove_skill_path},
 						class: "glyphicon glyphicon-remove-circle remove-skill") %>
 	  <% end %>
-	  <% us.plus_ones.first(10).each do |po| %>
-		<%= link_to image_tag(po.user.image_url(:thumb)), po.user %>
+	  <% if i < 6 %>
+		<% us.plus_ones.first(10).each do |po| %>
+		  <%= link_to image_tag(po.user.image_url(:thumb)), po.user %>
+		<% end %>
 	  <% end %>
 	</span>
   </div>
