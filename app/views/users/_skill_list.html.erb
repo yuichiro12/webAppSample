@@ -15,8 +15,8 @@
 							   url: remove_skill_path},
 						class: "glyphicon glyphicon-remove-circle remove-skill") %>
 	  <% end %>
-	  <% us.plus_ones.each do |po| %>
-		<%= link_to po.user.name, po.user %>
+	  <% us.plus_ones.first(6).each do |po| %>
+		<%= link_to image_tag(po.user.image_url(:thumb)), po.user %>
 	  <% end %>
 	</span>
   </div>

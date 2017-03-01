@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :user_skills, :skills
 
+  # http://qiita.com/Kaisyou/items/5add9d8b38177c45333c
+  mount_uploader :image, ImageUploader
 
   def add_user_skill(skill_id, point)
     user_skills.create(skill_id: skill_id, point: point)

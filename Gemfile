@@ -21,10 +21,15 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-#bootstrap
+# bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
-#bcrypt
+# bcrypt
 gem 'bcrypt', '~> 3.1.11'
+# image upload
+gem 'carrierwave', '1.0.0'
+# resize image
+gem 'rmagick', '2.16.0'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

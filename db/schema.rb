@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227202125) do
+ActiveRecord::Schema.define(version: 20170301143734) do
 
   create_table "plus_ones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "plused_user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170227202125) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.string   "image"
   end
 
 end
