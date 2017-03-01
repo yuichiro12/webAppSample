@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301143734) do
+ActiveRecord::Schema.define(version: 20170301171245) do
 
   create_table "plus_ones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "plused_user_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170301143734) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_skills_on_name", unique: true, using: :btree
   end
 
   create_table "user_skills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170301143734) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.string   "image"
+    t.index ["name"], name: "index_users_on_name", unique: true, using: :btree
   end
 
 end
