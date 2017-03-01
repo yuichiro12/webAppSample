@@ -21,6 +21,4 @@
 .\#*
 
 # Image files for users
-/public/images/*
-!/public/images/default.jpg
-!/public/images/thumb_default.jpg
+/public/uploads/*
