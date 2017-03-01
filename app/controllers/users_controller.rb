@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(:user_skills => [:skill, :plus_ones => :user]).find(params[:id])
     @skill = Skill.new
     @user_skill = UserSkill.new
   end

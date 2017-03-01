@@ -29,6 +29,8 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'carrierwave', '1.0.0'
 # resize image
 gem 'rmagick', '2.16.0'
+# N+1 detection
+gem 'bullet'
 
 
 # Use jquery as the JavaScript library
