@@ -5,8 +5,16 @@
 	  <%= button_tag(us.point,
 					 data: {plus1: current_user.id,
 							user_skill_id: us.id,
-							url: plus1_path}, class: "plus1-button") %>
-	  <%= s.name %>
+							url: plus1_path},
+					 class: "plus1-button") %>
+	  <%= link_to s.name, "#", data: {user_skill_id: us.id} %>
+	  <% if current_user.id == @user.id %>
+		<%= tag("span",
+				data: {user_skill_id: us.id,
+					   user_id: @user.id,
+					   url: remove_skill_path},
+				class: "glyphicon glyphicon-remove-circle remove-skill") %>
+	  <% end %>
 	</span>
   </div>
 <% end %>

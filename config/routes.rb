@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   post "/add_skill", to: "users#create_skill"
 
+  post "/remove_skill", to: "users#remove_skill"
+
   post "/plus1", to: "users#plus1"
 
   resources :users

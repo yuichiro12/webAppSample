@@ -24,6 +24,7 @@
 	  <%= submit_tag "submit", class: "btn btn-success skill-submit" %>
 	<% end %>
   </div>
+  <hr/>
   <% if current_user.id == @user.id %>
 	<%= link_to "edit", edit_user_path(@user), class: "btn btn-info" %>
 	<%= link_to "delete", @user, method: :delete, data: {confirm: "本当に削除しますか？"},

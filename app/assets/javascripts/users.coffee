@@ -13,6 +13,8 @@ $ ->
             target.hide()
             flag = false
 
+
+    # スキルの追加
     $("input.skill-submit").click (e)->
         $(this).prop("disabled", true)
         target = $(this).parent("form")
@@ -39,6 +41,7 @@ $ ->
         return e.preventDefault()
         
 
+    # +1する/取り消す
     $("div#skill-list").on "click", "button[data-plus1]", ->
         target = $(this)
         target.prop("disabled", true)
@@ -52,6 +55,23 @@ $ ->
             },
             success: (data)->
                 target.text(data.point)
+        })
+        target.prop("disabled", false)
+
+
+    # スキルの削除
+    $("div#skill-list").on "click", "span.remove-skill", ->
+        target = $(this)
+        target.prop("disabled", true)
+        $.ajax({
+            type: "post",
+            url: target.data("url"),
+            data: {
+                "user_id" : target.data("user-id"),
+                "user_skill_id" : target.data("user-skill-id")
+            },
+            success: (data)->
+                $("div#skill-list").html(data)
         })
         target.prop("disabled", false)
     return
