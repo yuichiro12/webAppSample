@@ -1,7 +1,7 @@
 <ul class="list-group">
   <% @user.skills.zip(@user.user_skills).each_with_index do |(s, us), i| %>
-	<%#= TODO: ボタンのスタイリング %>
-	<li class="list-group-item">
+	<% @cnt = i < 6 ? "lt6" : "geq6" %>
+	<li class="list-group-item user-skill-<%= @cnt %>">
 	  <span>
 		<%= button_tag(us.point,
 					   data: {plus1: current_user.id,
@@ -16,8 +16,8 @@
 								 url: remove_skill_path},
 						  class: "glyphicon glyphicon-remove-circle remove-skill") %>
 		<% end %>
-		<span class="skilltag-right"></span>
 		<% if i < 6 %>
+		  <span class="skilltag-right"></span>
 		  <% us.plus_ones.first(10).each do |po| %>
 			<%= link_to image_tag(po.user.image_url(:thumb)), po.user %>
 		  <% end %>

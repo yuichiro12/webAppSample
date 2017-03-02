@@ -13,7 +13,9 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
 	<h4>スキル・特徴
-	  <%= button_tag "edit skills", class: "btn btn-xs toggle-edit-button" %>
+	  <button class="btn btn-xs toggle-edit-button">
+		<span class="glyphicon glyphicon-pencil"></span> 編集する
+	  </button> 
 	</h4>
 	<hr/>
 	<%= form_tag(add_skill_url,

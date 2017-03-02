@@ -135,7 +135,6 @@ button.plus1-button {
 	color: #333;
 	text-decoration: none;
 	text-align: center;
-	cursor: pointer;
 }
 
 span.remove-skill {
@@ -143,8 +142,18 @@ span.remove-skill {
 	cursor: pointer;
 }
 
-button.toggle-edit-button {
+button.toggle-edit-button,
+button.toggle-edit-button:hover,
+button.toggle-edit-button:focus {
 	margin-left: 1em;
+	display: inline-block;
+	padding: .1em 1em;
+	border: 2px solid #333;
+	background-color: #333;
+	border-radius: .1em 2em 2em .5em/.4em 2em .5em 3em;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
 }
 
 input.edit-input {
@@ -160,4 +169,17 @@ ul.ui-widget {
 	padding: 20px;
 	background-color: #fff;
 	border: solid 1px #777;
+}
+
+li.user-skill-lt6 {
+	border: none;
+}
+
+li.user-skill-geq6 {
+	border: none;
+	float:left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	white-space:nowrap;
 }
