@@ -1,24 +1,36 @@
-# README
+# YOURSKILL 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[YOURSKILL(本番環境)](https://webappsample.herokuapp.com/users/12)
 
-Things you may want to cover:
+### 達成できたこと
 
-* Ruby version
+* ruby on railsの学習
 
-* System dependencies
+* altJSデビュー
 
-* Configuration
+* 必須要件
 
-* Database creation
+* スキルを隠す機能以外のオプショナル要件
 
-* Database initialization
 
-* How to run the test suite
+### やり残したこと（やりたかったこと順）
 
-* Services (job queues, cache servers, search engines, etc.)
+* アイコン用画像ファイルの外部ストレージ化（herokuが再起動したらデフォルトアイコン以外の画像が死ぬ）
 
-* Deployment instructions
+* スキルを隠す機能
 
-* ...
+* エラーページ作成（Railsアプリケーションであることを隠すため）
+
+* ```edit skill```ボタンのスタイル変更
+
+* ajax postのエラーが起きたときにメッセージを出す
+
+* name，passwordなどでの文字制限，長さのバリデーション
+
+* オートコンプリートの動作がイマイチ（```tab```キーで次の要素に移動し，```Enter```で選択し，もう一度```Enter```で送信したいが，実際は```↓```キーで次の要素に移動，```tab```キーで選択，```Enter```で送信になっている）
+
+* +1したとき非同期でスキルの横にアバター追加
+
+### その他
+
+* 本番環境で稀にglyphiconが読み込めない時がある（再現できない）
