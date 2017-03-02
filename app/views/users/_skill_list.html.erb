@@ -1,25 +1,28 @@
-<% @user.skills.zip(@user.user_skills).each_with_index do |(s, us), i| %>
-  <%#= TODO: ボタンのスタイリング %>
-  <div>
-	<span>
-	  <%= button_tag(us.point,
-					 data: {plus1: current_user.id,
-							user_skill_id: us.id,
-							url: plus1_path},
-					 class: "plus1-button") %>
-	  <%= link_to s.name, "/skills/#{s.name}", data: {user_skill_id: us.id} %>
-	  <% if current_user.id == @user.id %>
-		<%= content_tag(:span, "",
-						data: {user_skill_id: us.id,
-							   user_id: @user.id,
-							   url: remove_skill_path},
-						class: "glyphicon glyphicon-remove-circle remove-skill") %>
-	  <% end %>
-	  <% if i < 6 %>
-		<% us.plus_ones.first(10).each do |po| %>
-		  <%= link_to image_tag(po.user.image_url(:thumb)), po.user %>
+<ul class="list-group">
+  <% @user.skills.zip(@user.user_skills).each_with_index do |(s, us), i| %>
+	<%#= TODO: ボタンのスタイリング %>
+	<li class="list-group-item">
+	  <span>
+		<%= button_tag(us.point,
+					   data: {plus1: current_user.id,
+							  user_skill_id: us.id,
+							  url: plus1_path},
+					   class: "plus1-button") %>
+		<%= link_to s.name, "/skills/#{s.id}", data: {user_skill_id: us.id}, class: "skilltag" %>
+		<% if current_user.id == @user.id %>
+		  <%= content_tag(:span, "",
+						  data: {user_skill_id: us.id,
+								 user_id: @user.id,
+								 url: remove_skill_path},
+						  class: "glyphicon glyphicon-remove-circle remove-skill") %>
 		<% end %>
-	  <% end %>
-	</span>
-  </div>
-<% end %>
+		<span class="skilltag-right"></span>
+		<% if i < 6 %>
+		  <% us.plus_ones.first(10).each do |po| %>
+			<%= link_to image_tag(po.user.image_url(:thumb)), po.user %>
+		  <% end %>
+		<% end %>
+	  </span>
+	</li>
+  <% end %>
+</ul>

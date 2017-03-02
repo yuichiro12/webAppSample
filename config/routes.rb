@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get "/login", to: "sessions#new"
 
-  get "/skills/:name", to: "users#show_skilled_users"
+  get "/skills/:id", to: "users#show_skilled_users"
 
   post "/login", to: "sessions#create"
 
@@ -19,6 +19,4 @@ Rails.application.routes.draw do
   post "/plus1", to: "users#plus1"
 
   resources :users
-  # TODO 使わないかも
-  resources :user_skills, only: [:create, :destroy]
 end

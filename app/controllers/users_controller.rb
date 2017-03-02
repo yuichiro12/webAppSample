@@ -1,6 +1,6 @@
 # coding: utf-8
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:show, :edit, :create, :update, :destroy]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
 
   def logged_in_user
     unless logged_in?
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show_skilled_users
-    @skilled_users = Skill.find_by(name: params[:name]).users
+    @skill = Skill.find(params[:id])
   end
 
   def new

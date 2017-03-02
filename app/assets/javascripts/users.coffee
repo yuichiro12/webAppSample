@@ -6,13 +6,17 @@ $ ->
     # テキストエリアのtoggle表示
     do ->
         flag = false
-        $("button[data-toggle]").click ->
-            target = $("." + $(this).data("toggle"))
+        $(".remove-skill").hide()
+        $("button.toggle-edit-button").click ->
+            target1 = $(".form-add-skill")
+            target2 = $(".remove-skill")
             if flag == false
-                target.show()
+                target1.show()
+                target2.show()
                 flag = true
             else
-                target.hide()
+                target1.hide()
+                target2.hide()
                 flag = false
 
 
@@ -63,6 +67,7 @@ $ ->
                 "user_skill_id" : target.data("user-skill-id"),
                 "plused_user_id" : target.data("plus1")
             },
+            # TODO エラー時の処理
             success: (data)->
                 target.text(data.point)
         })
@@ -80,6 +85,7 @@ $ ->
                 "user_id" : target.data("user-id"),
                 "user_skill_id" : target.data("user-skill-id")
             },
+            # TODO エラー時の処理
             success: (data)->
                 $("div#skill-list").html(data)
         })

@@ -1,2 +1,163 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+/* universal */
+
+body {
+	padding-top: 60px;
+}
+
+section {
+	overflow: auto;
+}
+
+textarea {
+	resize: vertical;
+}
+
+.center {
+	text-align: center;
+}
+
+.center h1 {
+	margin-bottom: 10px;
+}
+
+ul > li {
+	list-style: none;
+}
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+}
+
+h1 {
+	font-size: 3em;
+	letter-spacing: -2px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.2em;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
+	text-align: center;
+	font-weight: normal;
+	color: #777;
+}
+
+p {
+	font-size: 1.1em;
+	line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+	float: left;
+	margin-right: 10px;
+	font-size: 1.7em;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	padding-top: 9px;
+	font-weight: bold;
+}
+
+#logo:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+
+/* footer */
+
+footer {
+	margin-top: 45px;
+	padding-top: 5px;
+	border-top: 1px solid #eaeaea;
+	color: #777;
+}
+
+footer a {
+	color: #555;
+}
+
+footer a:hover {
+	color: #222;
+}
+
+footer small {
+	float: left;
+}
+
+footer ul {
+	float: right;
+	list-style: none;
+}
+
+footer ul li {
+	float: left;
+	margin-left: 15px;
+}
+
+
+/* button, tag */
+
+a.skilltag {
+	margin-left: 1em;
+	display: inline-block;
+	padding: .1em 1em;
+	border: 2px solid #333;
+	border-radius: 3em .5em 2em .5em/.4em 2em .5em 3em;
+	color: #333;
+	text-decoration: none;
+	text-align: center;
+}
+
+span.skilltag-right {
+	margin-right: 2em;
+}
+
+button.plus1-button {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background: -webkit-linear-gradient(#fff, #fff);
+	background: linear-gradient(#fff , #fff);
+	border: 2px solid #333;
+	border-radius: 50%;
+	color: #333;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+}
+
+span.remove-skill {
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+button.toggle-edit-button {
+	margin-left: 1em;
+}
+
+input.edit-input {
+	margin-bottom: 2em;
+}
+
+textarea.edit-input {
+	margin-bottom: 2em;
+}
+
+ul.ui-widget {
+	width: 200px;
+	padding: 20px;
+	background-color: #fff;
+	border: solid 1px #777;
+}

@@ -1,5 +1,5 @@
 module ApplicationHelper
   def full_title(title = "")
-    title.empty? ? "WebAppSample" : title + " - WebAppSample"
+    title.empty? ? "YOURSKILL" : title + " - YOURSKILL"
   end
 end
