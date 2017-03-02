@@ -1,8 +1,18 @@
 # coding: utf-8
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:show, :edit, :create, :update, :destroy]
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "ログインしてください！"
+      redirect_to login_url
+    end
+  end
+
+
   def home
   end
-  
+
   def show
     @user = User.includes(:user_skills => [:skill, :plus_ones => :user]).find(params[:id])
     @skill = Skill.new
