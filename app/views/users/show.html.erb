@@ -21,6 +21,7 @@
 				 class: "form-add-skill",
 				 style: "display:none;") do |f| %>
 	  <%= text_field_tag :skillname, "", class: "form-control col-md-6 skill-name" %>
+	  <%= hidden_field_tag "skill-list", @skill_list %>
 	  <%= submit_tag "submit", class: "btn btn-success skill-submit" %>
 	<% end %>
   </div>

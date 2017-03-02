@@ -31,6 +31,8 @@ gem 'carrierwave', '1.0.0'
 gem 'rmagick', '2.16.0'
 # N+1 detection
 gem 'bullet'
+# jquery-ui for autocomplete
+gem 'jquery-ui-rails'
 
 
 # Use jquery as the JavaScript library

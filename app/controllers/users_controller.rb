@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.includes(:user_skills => [:skill, :plus_ones => :user]).find(params[:id])
     @skill = Skill.new
     @user_skill = UserSkill.new
+    @skill_list = Skill.select(:name).collect{|e| e[:name]}.join(",")
   end
 
   def show_skilled_users
@@ -19,7 +20,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(s_params(:user, :name, :password, :image))
-    logger.debug @user.pretty_inspect
 
     if User.find_by(name: @user.name)
       flash.now[:danger] = "既にユーザー名が存在します！別の名前にしてください"
@@ -50,7 +50,6 @@ class UsersController < ApplicationController
   def remove_skill
     prm = s_params(false, :user_id, :user_skill_id)
     @user = User.find(prm[:user_id])
-    logger.debug prm.pretty_inspect
     UserSkill.find(prm[:user_skill_id]).destroy
     render partial: "skill_list"
   end

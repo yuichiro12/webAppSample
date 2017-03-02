@@ -3,16 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-    flag = false
-    $("button[data-toggle]").click ->
-        target = $("." + $(this).data("toggle"))
-        if flag == false
-            target.show()
-            flag = true
-        else
-            target.hide()
-            flag = false
+    # テキストエリアのtoggle表示
+    do ->
+        flag = false
+        $("button[data-toggle]").click ->
+            target = $("." + $(this).data("toggle"))
+            if flag == false
+                target.show()
+                flag = true
+            else
+                target.hide()
+                flag = false
 
+
+    # autocomplete
+    do ->
+        skill_list = $("input#skill-list").val().split(",")
+        $("input.skill-name").autocomplete({
+            source: skill_list,
+            autoFocus: true
+        })
 
     # スキルの追加
     $("input.skill-submit").click (e)->
@@ -74,4 +84,3 @@ $ ->
                 $("div#skill-list").html(data)
         })
         target.prop("disabled", false)
-    return
